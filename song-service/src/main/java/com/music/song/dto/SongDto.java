@@ -1,13 +1,11 @@
-package com.music.resource.dto;
+package com.music.song.dto;
 
 import lombok.Data;
 
 import java.util.Map;
 
 @Data
-public class Song {
-
-    private String id;
+public class SongDto {
 
     private Long resourceId;
 

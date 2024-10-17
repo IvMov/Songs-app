@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface SongService {
 
-    String save(Song song);
+    Song save(Song song);
 
-    Song getById(String id);
+    Song getById(Long id);
 
-    List<String> deleteByIds(List<String> ids);
+    List<Long> deleteByIds(List<Long> ids);
 
-    List<String> getAllIds();
+    List<Long> getAllIds();
 }

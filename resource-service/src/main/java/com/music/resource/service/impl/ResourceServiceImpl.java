@@ -1,6 +1,6 @@
 package com.music.resource.service.impl;
 
-import com.music.resource.dto.Song;
+import com.music.resource.dto.SongMetadataDto;
 import com.music.resource.entity.Resource;
 import com.music.resource.repository.ResourceRepository;
 import com.music.resource.service.FileParserService;
@@ -50,25 +50,29 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Long> deleteByIds(List<Long> ids) {
-        repository.deleteAllById(ids);
-
-        return ids;
+        return ids.stream()
+                .map(this::deleteById)
+                .filter(id -> !repository.existsById(id))
+                .toList();
     }
 
 
     private void saveMetadata(Long resourceId, byte[] bytes) {
         try {
             Map<String, String> metadata = fileParserService.getFileMetadata(bytes);
-            Song song = new Song();
-            song.setResourceId(resourceId);
-            song.setMetadata(metadata);
-
-            songServiceClient.saveSong(song)
-                    .subscribe(result -> log.info("Metadata saved to song-service with id {}", result.toString()));
+            SongMetadataDto songMetadataDto = new SongMetadataDto();
+            songMetadataDto.setResourceId(resourceId);
+            songMetadataDto.setMetadata(metadata);
+            log.info("Metadata saved to song-service with id {}", songServiceClient.saveSong(songMetadataDto));
         } catch (TikaException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private Long deleteById(Long id) {
+        repository.deleteById(id);
+
+        return id;
+    }
 
 }

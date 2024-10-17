@@ -15,28 +15,34 @@ public class SongServiceImpl implements SongService {
     private final SongRepository repository;
 
     @Override
-    public String save(Song song) {
-        return repository.save(song).getId();
+    public Song save(Song song) {
+        return repository.save(song);
     }
 
     @Override
-    public Song getById(String id) {
+    public Song getById(Long id) {
         return repository.findById(id)
                 .orElseThrow();
     }
 
     @Override
-    public List<String> deleteByIds(List<String> ids) {
-        repository.deleteAllById(ids);
-
-        return ids;
+    public List<Long> deleteByIds(List<Long> ids) {
+        return ids.stream()
+                .map(this::deleteById)
+                .filter(id -> !repository.existsById(id))
+                .toList();
     }
 
     @Override
-    public List<String> getAllIds() {
-        return repository.findAll().stream()
-                .map(Song::getId)
-                .toList();
+    public List<Long> getAllIds() {
+        return repository.findAllIds();
+    }
+
+
+    private Long deleteById(Long id) {
+        repository.deleteById(id);
+
+        return id;
     }
 
 }

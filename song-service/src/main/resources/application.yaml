@@ -10,9 +10,11 @@ spring:
     name: song-service
   jpa:
     hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
       ddl-auto: update
       show-sql: true
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/songservice
-      database: songservice
+  datasource:
+    url: jdbc:postgresql://localhost:5433/song_service_db
+    username: postgres
+    password: postgres
+

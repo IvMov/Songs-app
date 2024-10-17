@@ -1,19 +1,23 @@
 package com.music.song.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Map;
 
 @Data
-@Document("songs")
+@Entity
+@Table(name = "songs")
 public class Song {
 
-    @MongoId
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Long resourceId;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, String> metadata;
 }

@@ -2,13 +2,17 @@ package com.music.resource.controller;
 
 import com.music.resource.service.ResourceService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/resources")
@@ -18,23 +22,30 @@ public class ResourceController {
     private final ResourceService resourceService;
 
     @PostMapping
-    Long createNewResource(@RequestBody byte[] bytes) {
+    ResponseEntity<Map<String, Long>> createNewResource(@RequestBody byte[] bytes) {
         try {
-            return resourceService.save(bytes).getId();
+            Long id = resourceService.save(bytes).getId();
+            return ResponseEntity.ok(Map.of("id", id));
         } catch (RuntimeException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_ERROR_MESSAGE, e);
         }
     }
 
     @GetMapping
-    List<Long> findAll() {
-        return resourceService.getAllIds();
+    ResponseEntity<List<Long>> findAllIds() {
+        List<Long> allIds = resourceService.getAllIds();
+
+        return ResponseEntity.ok(allIds);
     }
 
     @GetMapping("/{id}")
-    byte[] findById(@PathVariable Long id) {
+    ResponseEntity<byte[]> findById(@PathVariable Long id) {
         try {
-            return resourceService.getBytesById(id);
+            byte[] bytes = resourceService.getBytesById(id);
+
+            return ResponseEntity.ok(bytes);
         } catch (RuntimeException e) {
             throw (e instanceof NoSuchElementException)
                     ? new ResponseStatusException(HttpStatus.NOT_FOUND, "The resource with the specified id does not exist", e)
@@ -43,9 +54,11 @@ public class ResourceController {
     }
 
     @DeleteMapping
-    List<Long> deleteByIds(@RequestParam List<Long> ids) {
+    ResponseEntity<Map<String, List<Long>>> deleteByIds(@RequestParam List<Long> ids) {
         try {
-            return resourceService.deleteByIds(ids);
+            List<Long> deletedIds = resourceService.deleteByIds(ids);
+
+            return ResponseEntity.ok(Map.of("ids", deletedIds));
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_ERROR_MESSAGE, e);
         }
