@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -58,11 +59,14 @@ public class SongController {
     }
 
     @DeleteMapping
-    ResponseEntity<List<Long>> deleteByIds(@Valid @Size(max = 200) @RequestParam List<Long> ids) {
+    ResponseEntity<List<Long>> deleteByIds(@Valid @Size(max = 200) String ids) {
         try {
-            List<Long> deletedIds = service.deleteByIds(ids);
+            List<Long> idValues = Arrays.stream(ids.split(","))
+                    .map(String::trim)
+                    .map(Long::valueOf)
+                    .toList();
 
-            return ResponseEntity.ok(deletedIds);
+            return ResponseEntity.ok(idValues);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_ERROR_MESSAGE, e);
         }
