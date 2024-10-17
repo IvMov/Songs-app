@@ -1,0 +1,18 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  application:
+    name: song-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/songservice
+      database: songservice

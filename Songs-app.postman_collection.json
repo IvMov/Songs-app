@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "2d4fcd92-726b-4e08-9e58-99a74cc37c23",
+		"name": "Songs-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20463485"
+	},
+	"item": [
+		{
+			"name": "Resorce-service",
+			"item": [
+				{
+					"name": "Add new resource",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/ivan_movchanets/Downloads/Adrián Berenguer - Discipline.mp3"
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/resources",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all resources ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resources",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resource by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resources/26",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resources",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete resources by ids",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resources?ids=1, 2, 3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resources"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1, 2, 3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Song-service",
+			"item": [
+				{
+					"name": "Get all songs ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/songs",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get song by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/songs/670fcb75bf435a13f6d897af",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"songs",
+								"670fcb75bf435a13f6d897af"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete songs by ids",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/songs?ids=1, 2, 3, 4",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1, 2, 3, 4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
