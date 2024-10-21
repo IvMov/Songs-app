@@ -1,0 +1,6 @@
+song-service:
+  url: http://localhost:8002
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resource_service_db

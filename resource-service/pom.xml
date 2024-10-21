@@ -11,7 +11,7 @@
 	<groupId>com.music</groupId>
 	<artifactId>resource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>resource</name>
+	<name>resource-service</name>
 	<description>Resource service of music platform</description>
 	<url/>
 	<licenses>
@@ -27,7 +27,10 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>23</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.compilerVersion>21</maven.compiler.compilerVersion>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -68,6 +71,11 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

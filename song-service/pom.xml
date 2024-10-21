@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.music</groupId>
-	<artifactId>song-service</artifactId>
+	<artifactId>song</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>song</name>
+	<name>song-service</name>
 	<description>Song service of music platform</description>
 	<url/>
 	<licenses>

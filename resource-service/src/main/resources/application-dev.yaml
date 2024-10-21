@@ -1,0 +1,6 @@
+song-service:
+  url: http://song-service
+
+spring:
+  datasource:
+    url: jdbc:postgresql://resource-service-db/resource_service_db
