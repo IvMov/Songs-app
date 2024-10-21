@@ -1,0 +1,45 @@
+version: '2.28'
+
+services:
+  # services
+  resource-service:
+    image: 'resource-service:latest'
+    container_name: resource-service
+    build:
+      context: .
+    ports:
+      - "8001:8001"
+    depends_on:
+      - song-service
+      - resource-service-db
+
+  song-service:
+    image: 'song-service:latest'
+    container_name: song-service
+    build:
+      context: .
+    ports:
+      - "8002:8002"
+    depends_on:
+      - song-service-db
+
+  # db
+  resource-service-db:
+    image: 'postgres:17-alpine'
+    container_name: resource-service-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${RESOURCE_SERVICE_DB}
+
+  song-service-db:
+    image: 'postgres:17-alpine'
+    container_name: song-service-db
+    ports:
+      - "8433:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${SONG_SERVICE_DB}
