@@ -1,5 +1,5 @@
 song-service:
-  url: http://song-service:8002
+  url: http://song-service
 
 spring:
   datasource:
