@@ -188,6 +188,26 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Discovery services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8761/eureka/apps",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"eureka",
+						"apps"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

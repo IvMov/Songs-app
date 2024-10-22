@@ -1,3 +1,10 @@
 spring:
   datasource:
     url: jdbc:postgresql://song-service-db/song_service_db
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
