@@ -21,11 +21,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/resources",
+							"raw": "localhost:8001/resources",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8001",
 							"path": [
 								"resources"
 							]
@@ -39,11 +39,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/resources",
+							"raw": "localhost:8001/resources",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8001",
 							"path": [
 								"resources"
 							]
@@ -57,14 +57,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/resources/26",
+							"raw": "localhost:8001/resources/3",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8001",
 							"path": [
 								"resources",
-								"26"
+								"3"
 							]
 						}
 					},
@@ -76,18 +76,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/resources?ids=1, 2, 3",
+							"raw": "localhost:8001/resources?ids= 56, 12, 2",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8001",
 							"path": [
 								"resources"
 							],
 							"query": [
 								{
 									"key": "ids",
-									"value": "1, 2, 3"
+									"value": " 56, 12, 2"
 								}
 							]
 						}
@@ -105,11 +105,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/songs",
+							"raw": "localhost:8002/songs",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "8002",
 							"path": [
 								"songs"
 							]
@@ -123,14 +123,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/songs/670fcb75bf435a13f6d897af",
+							"raw": "localhost:8002/songs/1",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "8002",
 							"path": [
 								"songs",
-								"670fcb75bf435a13f6d897af"
+								"1"
 							]
 						}
 					},
@@ -142,19 +142,46 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/songs?ids=1, 2, 3, 4",
+							"raw": "localhost:8002/songs?ids=7, 2, 8",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "8002",
 							"path": [
 								"songs"
 							],
 							"query": [
 								{
 									"key": "ids",
-									"value": "1, 2, 3, 4"
+									"value": "7, 2, 8"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save song",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"resourceId\" : \"1\", \r\n    \"metadata\" : {\r\n        \"id\": \"key\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8002/songs",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"songs"
 							]
 						}
 					},

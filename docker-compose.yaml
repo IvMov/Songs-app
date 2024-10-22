@@ -1,14 +1,10 @@
-version: '2.28'
-
-name: 'music-app'
-
 services:
-  # services
+  # apps
   resource-service:
-    image: 'resource-service:latest'
     container_name: resource-service
-    build:
-      context: .
+    build: ./resource-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
     ports:
       - '8001:8001'
     depends_on:
@@ -16,16 +12,16 @@ services:
       - resource-service-db
 
   song-service:
-    image: 'song-service:latest'
     container_name: song-service
-    build:
-      context: .
+    build: ./song-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
     ports:
       - '8002:8002'
     depends_on:
       - song-service-db
 
-  # db
+  # dbs
   resource-service-db:
     image: 'postgres:17-alpine'
     container_name: resource-service-db
@@ -35,6 +31,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${RESOURCE_SERVICE_DB}
+    volumes:
+      - resource-service-db-volume:/var/lib/postgresql/data
+      - ./resource-db:/docker-entrypoint-initdb.d/
 
   song-service-db:
     image: 'postgres:17-alpine'
@@ -45,3 +44,10 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${SONG_SERVICE_DB}
+    volumes:
+      - song-service-db-volume:/var/lib/postgresql/data
+      - ./song-db:/docker-entrypoint-initdb.d/
+
+volumes:
+  resource-service-db-volume:
+  song-service-db-volume:

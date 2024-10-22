@@ -1,4 +1,20 @@
-FROM alpine/java:21-jre
-MAINTAINER iv.movchanets@gmail.com
-COPY target/song-0.0.1-SNAPSHOT.jar song-service-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/song-service-0.0.1-SNAPSHOT.jar"]
+# Build stage
+FROM maven:3.9-eclipse-temurin-21-alpine as build
+
+WORKDIR /app/song-app
+
+COPY pom.xml /app/song-app/pom.xml
+RUN mvn dependency:go-offline
+
+COPY src/ /app/song-app/src/
+RUN mvn clean package -DskipTests
+
+# Run stage
+FROM alpine/java:21-jdk as run
+WORKDIR /app/song-app
+
+COPY --from=build /app/song-app/target/*.jar app.jar
+
+EXPOSE 8002
+
+CMD ["java", "-jar", "app.jar"]
