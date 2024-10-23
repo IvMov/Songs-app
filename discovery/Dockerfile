@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3.9-eclipse-temurin-21-alpine as build
+FROM maven:3.9-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app/discovery
 
@@ -10,7 +10,7 @@ COPY src/ /app/discovery/src/
 RUN mvn clean package -DskipTests
 
 # Run stage
-FROM alpine/java:21-jdk as run
+FROM alpine/java:21-jdk AS run
 WORKDIR /app/discovery
 
 COPY --from=build /app/discovery/target/*.jar app.jar

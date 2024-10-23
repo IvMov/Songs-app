@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3.9-eclipse-temurin-21-alpine as build
+FROM maven:3.9-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app/resource-app
 
@@ -10,7 +10,7 @@ COPY src/ /app/resource-app/src/
 RUN mvn clean package -DskipTests
 
 # Run stage
-FROM alpine/java:21-jdk as run
+FROM alpine/java:21-jdk AS run
 WORKDIR /app/resource-app
 
 COPY --from=build /app/resource-app/target/*.jar app.jar

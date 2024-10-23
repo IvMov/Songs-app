@@ -17,6 +17,7 @@ services:
     depends_on:
       - discovery
       - song-service
+      - nginx
       - resource-service-db
 
   song-service:

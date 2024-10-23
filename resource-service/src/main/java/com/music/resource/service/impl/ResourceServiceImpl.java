@@ -50,6 +50,8 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Long> deleteByIds(List<Long> ids) {
+        List<Long> removedSongs = songServiceClient.deleteSongs(ids);
+        log.info("Metadata deleted from song-service with ids {}", removedSongs);
         return ids.stream()
                 .map(this::deleteById)
                 .filter(id -> !repository.existsById(id))

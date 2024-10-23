@@ -65,8 +65,7 @@ public class SongController {
                     .map(String::trim)
                     .map(Long::valueOf)
                     .toList();
-
-            return ResponseEntity.ok(idValues);
+            return ResponseEntity.ok(service.deleteByIds(idValues));
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_ERROR_MESSAGE, e);
         }
