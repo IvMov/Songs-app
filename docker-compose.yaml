@@ -23,8 +23,6 @@ services:
     build: ./song-service
     environment:
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
-    deploy:
-      replicas: 2
     depends_on:
       - discovery
       - song-service-db

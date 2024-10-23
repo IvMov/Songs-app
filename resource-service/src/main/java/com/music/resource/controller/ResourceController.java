@@ -4,6 +4,7 @@ import com.music.resource.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -46,7 +47,9 @@ public class ResourceController {
         try {
             byte[] bytes = resourceService.getBytesById(id);
 
-            return ResponseEntity.ok(bytes);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("audio/mpeg"))
+                    .body(bytes);
         } catch (RuntimeException e) {
             throw (e instanceof NoSuchElementException)
                     ? new ResponseStatusException(HttpStatus.NOT_FOUND, "The resource with the specified id does not exist", e)
